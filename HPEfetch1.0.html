@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HPEfetch</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #1e1e1e;
+            color: #c5c5c5;
+            padding: 20px;
+        }
+        .info {
+            display: flex;
+        }
+        .info img {
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+        }
+        .details {
+            line-height: 1.5;
+        }
+        .details span {
+            color: #56b6c2;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <img src="https://cdn.discordapp.com/attachments/1007672968723304489/1242494758929039402/hpefetch-removebg-preview.png?ex=664e0aea&is=664cb96a&hm=895233aba7d7274f0b231313ba3babf50e2c3be4d13818e69ddb4c1f3fa21b79&" alt="Logo">
+        <div class="details">
+            <p><span>User Agent:</span> <span id="user"></span></p>
+            <p><span>OS:</span> <span id="os"></span></p>
+            <p><span>Browser:</span> <span id="browser"></span></p>
+            <p><span>Language:</span> <span id="language"></span></p>
+            <p><span>Resolution:</span> <span id="resolution"></span></p>
+            <p><span>Logical Processors:</span> <span id="cpu"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function getOSArchitecture() {
+            const userAgent = navigator.userAgent;
+            if (userAgent.indexOf('WOW64') !== -1 || userAgent.indexOf('Win64') !== -1) {
+                return 'Windows (64-bit)';
+            } else if (userAgent.indexOf('Win32') !== -1) {
+                return 'Windows (32-bit)';
+            } else if (userAgent.indexOf('Linux x86_64') !== -1) {
+                return 'Linux (64-bit)';
+            } else if (userAgent.indexOf('Linux i686') !== -1) {
+                return 'Linux (32-bit)';
+            } else {
+                return navigator.platform;
+            }
+        }
+
+        document.getElementById('user').innerText = navigator.userAgent;
+        document.getElementById('os').innerText = getOSArchitecture();
+        document.getElementById('browser').innerText = navigator.appName + " " + navigator.appVersion;
+        document.getElementById('language').innerText = navigator.language;
+        document.getElementById('resolution').innerText = window.screen.width + "x" + window.screen.height;
+
+        document.getElementById('cpu').innerText = navigator.hardwareConcurrency || "N/A";
+    </script>
+</body>
+</html>
